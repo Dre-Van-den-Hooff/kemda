@@ -2,14 +2,14 @@ import { Title } from '@mantine/core';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Kemda - Home',
-  description: 'Kemda Contructions BV - Home pagina',
+  title: 'Kemda - Contact',
+  description: 'Kemda Contructions BV - Contact pagina',
 };
 
-export default function Home() {
+export default function Contact() {
   return (
     <div>
-      <Title>Home</Title>
+      <Title>Contact</Title>
     </div>
   );
 }
