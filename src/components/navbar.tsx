@@ -30,9 +30,10 @@ const menuItems: MenuItem[] = [
 export default function Navbar() {
   const pathname = usePathname();
 
+  // Determine if the current pathname is active.
   const isActive = React.useCallback(
-    (url: string) => {
-      return pathname === url;
+    (path: string) => {
+      return pathname === path;
     },
     [pathname],
   );
@@ -48,6 +49,7 @@ export default function Navbar() {
         maw={sizes.maxWidth}
         w="100%"
       >
+        {/* Logo section */}
         <Flex gap="0.5rem">
           <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <Image src={logo} alt="Logo Kemda" width={96} height={50} />
@@ -61,7 +63,7 @@ export default function Navbar() {
             </Text>
           </Flex>
         </Flex>
-
+        {/* Tabs section */}
         <Group gap="lg">
           <Menu width={250} position="bottom-start" trigger="hover">
             <Menu.Target>
