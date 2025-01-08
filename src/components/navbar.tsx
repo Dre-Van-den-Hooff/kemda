@@ -1,21 +1,22 @@
 'use client';
 
 import * as React from 'react';
-import { Menu, Flex, Group, Button, Text } from '@mantine/core';
-import { IconChevronDown } from '@tabler/icons-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Flex, Burger, Drawer, Button } from '@mantine/core';
+import { useMediaQuery, useDisclosure } from '@mantine/hooks';
 import { usePathname } from 'next/navigation';
 import { colors, sizes } from '@/globals';
-import Image from 'next/image';
-import logo from '../../public/logo.png';
+import logoWhite from '../../public/logo-white.png';
+import NavButtons from './navButtons';
 
-type MenuItem = {
+export type MenuItem = {
   id: number;
   href: string;
   name: string;
 };
 
-const menuItems: MenuItem[] = [
+const homeItems: MenuItem[] = [
   { id: 1, href: '/deuren', name: 'Deuren' },
   { id: 2, href: '/ikea-keukens', name: 'IKEA keukens' },
   { id: 3, href: '/schrijnwerkerij', name: 'Binnen- & buitenschrijnwerkerij' },
@@ -27,8 +28,15 @@ const menuItems: MenuItem[] = [
   { id: 5, href: '/gyproc', name: 'Gyprocwerken' },
 ];
 
+const menuItems: MenuItem[] = [
+  ...homeItems,
+  { id: 6, href: '/contact', name: 'Contact' },
+];
+
 export default function Navbar() {
   const pathname = usePathname();
+  const isMobile = useMediaQuery(`(max-width: ${sizes.mobile})`);
+  const [opened, { toggle, close }] = useDisclosure(false);
 
   // Determine if the current pathname is active.
   const isActive = React.useCallback(
@@ -50,55 +58,44 @@ export default function Navbar() {
         w="100%"
       >
         {/* Logo section */}
-        <Flex gap="0.5rem">
-          <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Image src={logo} alt="Logo Kemda" width={96} height={50} />
-          </Link>
-          <Flex direction="column">
-            <Text c={colors.white} fw={900} size="1.5rem">
-              Kemda Constructions BV
-            </Text>
-            <Text c={colors.grey} fw={600} lts={1.2} size="1.2rem">
-              Algemene Schrijnwerkerij
-            </Text>
-          </Flex>
-        </Flex>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Image src={logoWhite} alt="Logo Kemda" width={180} />
+        </Link>
         {/* Tabs section */}
-        <Group gap="lg">
-          <Menu width={250} position="bottom-start" trigger="hover">
-            <Menu.Target>
-              <Button
-                variant="subtle"
-                rightSection={<IconChevronDown size={16} />}
-                color={isActive('/') ? colors.primary : colors.white}
-                component={Link}
-                href="/"
-              >
-                Home
-              </Button>
-            </Menu.Target>
-            <Menu.Dropdown bg={colors.black}>
-              {menuItems.map((item) => (
-                <Menu.Item
-                  key={item.id}
-                  component={Link}
-                  href={item.href}
-                  color={isActive(item.href) ? colors.primary : colors.white}
-                >
-                  {item.name}
-                </Menu.Item>
-              ))}
-            </Menu.Dropdown>
-          </Menu>
-          <Button
-            component={Link}
-            href="/contact"
-            variant="outline"
-            color={isActive('/contact') ? colors.primary : colors.white}
-          >
-            Contact
-          </Button>
-        </Group>
+        {isMobile ? (
+          <>
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              color={colors.white}
+              aria-label="Toggle navigation"
+            />
+            <Drawer
+              opened={opened}
+              onClose={close}
+              title="Kemda constructions"
+              position="top"
+              size="100%"
+            >
+              <Flex direction="column" gap="1rem" mt="3rem">
+                {menuItems.map((item) => (
+                  <Button
+                    key={item.id}
+                    component={Link}
+                    href={item.href}
+                    color={isActive(item.href) ? colors.primary : colors.black}
+                    variant="subtle"
+                    onClick={close}
+                  >
+                    {item.name}
+                  </Button>
+                ))}
+              </Flex>
+            </Drawer>
+          </>
+        ) : (
+          <NavButtons menuItems={homeItems} isActive={isActive} />
+        )}
       </Flex>
     </Flex>
   );

@@ -6,5 +6,6 @@ export const colors = {
 };
 
 export const sizes = {
+  mobile: '460px',
   maxWidth: '1600px',
 };
