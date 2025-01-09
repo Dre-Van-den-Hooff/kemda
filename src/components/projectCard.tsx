@@ -34,6 +34,15 @@ export default function ProjectCard({ project }: Props) {
             </Flex>
           )}
           {/* TODO: Bullet points */}
+          {project.bulletPoints && (
+            <Flex direction="column" gap="0.5rem">
+              {project.bulletPoints.bullets.map((bullet) => (
+                <Text key={bullet.title} ta="justify">
+                  {bullet.title}
+                </Text>
+              ))}
+            </Flex>
+          )}
         </Accordion.Panel>
       </Accordion.Item>
     </Accordion>

@@ -1,6 +1,6 @@
 import { Title } from '@mantine/core';
 import type { Metadata } from 'next';
-import ProjectCard from '@/components/project';
+import ProjectCard from '@/components/projectCard';
 import type { Project } from '@/types/project';
 
 export const metadata: Metadata = {
