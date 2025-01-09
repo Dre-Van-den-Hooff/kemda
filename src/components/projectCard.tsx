@@ -1,7 +1,8 @@
 'use client';
 
 import type { Project } from '@/types/project';
-import { Accordion, Flex, Text, List } from '@mantine/core';
+import { Accordion, Flex, Text, List, ThemeIcon } from '@mantine/core';
+import { IconCheck } from '@tabler/icons-react';
 
 type Props = {
   project: Project;
@@ -17,9 +18,7 @@ export default function ProjectCard({ project }: Props) {
             {project.title}
           </Text>
           {/* Short description */}
-          <Text mt="1rem" ta="justify">
-            {project.shortDescription}
-          </Text>
+          <Text mt="1rem">{project.shortDescription}</Text>
           {/* TODO: Read more link */}
         </Accordion.Control>
         <Accordion.Panel>
@@ -33,12 +32,19 @@ export default function ProjectCard({ project }: Props) {
               ))}
             </Flex>
           )}
-          {/* TODO: Bullet points */}
+          {/* Bullet points */}
           {project.bulletPoints && (
-            <List>
+            <List
+              spacing="sm"
+              icon={
+                <ThemeIcon color="teal" size={24} radius="xl">
+                  <IconCheck width={16} height={16} />
+                </ThemeIcon>
+              }
+            >
               {project.bulletPoints.bullets.map((bullet) => (
                 <List.Item key={bullet.title}>
-                  <Text fw="bold">{bullet.title}</Text>
+                  <Text fw="bold">{bullet.title}:</Text>
                   <Text>{bullet.description}</Text>
                 </List.Item>
               ))}
