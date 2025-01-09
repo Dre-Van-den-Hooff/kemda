@@ -22,6 +22,28 @@ export default function ProjectCard({ project }: Props) {
           {/* TODO: Read more link */}
         </Accordion.Control>
         <Accordion.Panel>
+          {/* Bullet points */}
+          {project.bulletPoints && (
+            <>
+              <Text mb="sm">{project.bulletPoints.bulletTitle}</Text>
+              <List
+                spacing="sm"
+                mb="md"
+                icon={
+                  <ThemeIcon color="teal" size={24} radius="xl">
+                    <IconCheck width={16} height={16} />
+                  </ThemeIcon>
+                }
+              >
+                {project.bulletPoints.bullets.map((bullet) => (
+                  <List.Item key={bullet.title}>
+                    <Text fw="bold">{bullet.title}</Text>
+                    <Text>{bullet.description}</Text>
+                  </List.Item>
+                ))}
+              </List>
+            </>
+          )}
           {/* Long description */}
           {project.longDescription && (
             <Flex direction="column" gap="0.5rem">
@@ -31,24 +53,6 @@ export default function ProjectCard({ project }: Props) {
                 </Text>
               ))}
             </Flex>
-          )}
-          {/* Bullet points */}
-          {project.bulletPoints && (
-            <List
-              spacing="sm"
-              icon={
-                <ThemeIcon color="teal" size={24} radius="xl">
-                  <IconCheck width={16} height={16} />
-                </ThemeIcon>
-              }
-            >
-              {project.bulletPoints.bullets.map((bullet) => (
-                <List.Item key={bullet.title}>
-                  <Text fw="bold">{bullet.title}:</Text>
-                  <Text>{bullet.description}</Text>
-                </List.Item>
-              ))}
-            </List>
           )}
         </Accordion.Panel>
       </Accordion.Item>
