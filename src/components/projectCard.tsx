@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProjectCard({ project }: Props) {
   return (
-    <Accordion variant="contained" py="lg">
+    <Accordion variant="filled" py="lg">
       <Accordion.Item value={project.title}>
         <Accordion.Control>
           {/* Title */}
@@ -19,7 +19,6 @@ export default function ProjectCard({ project }: Props) {
           </Text>
           {/* Short description */}
           <Text mt="1rem">{project.shortDescription}</Text>
-          {/* TODO: Read more link */}
         </Accordion.Control>
         <Accordion.Panel>
           {/* Bullet points */}
