@@ -7,7 +7,7 @@ import { Flex, Burger, Drawer, Button } from '@mantine/core';
 import { useMediaQuery, useDisclosure } from '@mantine/hooks';
 import { usePathname } from 'next/navigation';
 import { colors, sizes } from '@/globals';
-import logoWhite from '../../public/logo-white.png';
+import logoWhite from '../../../public/logo-white.png';
 import NavButtons from './navButtons';
 
 export type MenuItem = {
@@ -53,7 +53,7 @@ export default function Navbar() {
         justify="space-between"
         align="center"
         h={120}
-        p="md"
+        pr="md"
         maw={sizes.maxWidth}
         w="100%"
       >

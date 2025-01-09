@@ -2,7 +2,7 @@ import { colors } from '@/globals';
 import { Group, Menu, Button } from '@mantine/core';
 import { IconChevronDown } from '@tabler/icons-react';
 import Link from 'next/link';
-import { MenuItem } from './navbar';
+import type { MenuItem } from '.';
 
 type Props = {
   menuItems: MenuItem[];
@@ -18,8 +18,6 @@ export default function NavButtons({ menuItems, isActive }: Props) {
             variant="subtle"
             rightSection={<IconChevronDown size={16} />}
             color={isActive('/') ? colors.primary : colors.white}
-            component={Link}
-            href="/"
           >
             Home
           </Button>
