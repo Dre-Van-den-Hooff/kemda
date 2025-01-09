@@ -1,7 +1,7 @@
 'use client';
 
 import type { Project } from '@/types/project';
-import { Accordion, Flex, Text } from '@mantine/core';
+import { Accordion, Flex, Text, List } from '@mantine/core';
 
 type Props = {
   project: Project;
@@ -35,13 +35,14 @@ export default function ProjectCard({ project }: Props) {
           )}
           {/* TODO: Bullet points */}
           {project.bulletPoints && (
-            <Flex direction="column" gap="0.5rem">
+            <List>
               {project.bulletPoints.bullets.map((bullet) => (
-                <Text key={bullet.title} ta="justify">
-                  {bullet.title}
-                </Text>
+                <List.Item key={bullet.title}>
+                  <Text fw="bold">{bullet.title}</Text>
+                  <Text>{bullet.description}</Text>
+                </List.Item>
               ))}
-            </Flex>
+            </List>
           )}
         </Accordion.Panel>
       </Accordion.Item>
