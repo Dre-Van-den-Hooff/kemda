@@ -3,20 +3,28 @@
 import type { Project } from '@/types/project';
 import { Accordion, Flex, Text, List, ThemeIcon } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
+import Divider from './divider';
+import { colors, sizes } from '@/globals';
+import { useMediaQuery } from '@mantine/hooks';
 
 type Props = {
   project: Project;
 };
 
 export default function ProjectCard({ project }: Props) {
+  const isMobile = useMediaQuery(`(max-width: ${sizes.mobile})`);
+
   return (
     <Accordion variant="filled" py="lg">
       <Accordion.Item value={project.title}>
         <Accordion.Control>
           {/* Title */}
-          <Text fw="bold" size="2rem">
-            {project.title}
-          </Text>
+          <Flex gap="lg">
+            <Divider color={colors.primary} />
+            <Text fw="bold" size={isMobile ? '1.5rem' : '2rem'}>
+              {project.title}
+            </Text>
+          </Flex>
           {/* Short description */}
           <Text mt="1rem">{project.shortDescription}</Text>
         </Accordion.Control>
