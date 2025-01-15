@@ -1,8 +1,7 @@
-import { Box, Flex, Title } from '@mantine/core';
 import type { Metadata } from 'next';
-import ProjectCard from '@/components/projectCard';
 import type { Project } from '@/types/project';
-import OtherServices from '@/components/otherServices';
+import OtherServices from '@/components/home/otherServices';
+import Projects from '@/components/home/projects';
 
 export const metadata: Metadata = {
   title: 'Kemda - Home',
@@ -14,16 +13,9 @@ export default async function Home() {
   const projects: Project[] = await response.json();
 
   return (
-    <Flex direction="column" gap="1rem">
-      <Title size={48} style={{ alignSelf: 'center' }}>
-        Individuele afgestemde projecten
-      </Title>
-      <Box>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </Box>
+    <>
+      <Projects projects={projects} />
       <OtherServices />
-    </Flex>
+    </>
   );
 }
